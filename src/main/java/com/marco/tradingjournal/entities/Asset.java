@@ -22,10 +22,22 @@ public class Asset {
     @GeneratedValue
     private UUID id;
 
-    private String simbolo; // Es: EUR/USD, XAU/USD, GER40
+    @Column(nullable = false, unique = true)
+    private String simbolo;
 
-    private String tipo; // Forex, Indice, Commodity, Crypto, ecc.
+    @Column(nullable = false)
+    private String tipo;
 
     @OneToMany(mappedBy = "asset", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Trade> trades = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Asset{" +
+                "id=" + id +
+                ", simbolo='" + simbolo + '\'' +
+                ", tipo='" + tipo + '\'' +
+                '}';
+    }
 }
+

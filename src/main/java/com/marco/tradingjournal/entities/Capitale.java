@@ -6,26 +6,30 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Table(name = "valuta")
+@Table(name = "capitale")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Valuta {
+public class Capitale {
 
     @Id
     @GeneratedValue
     private UUID id;
 
-    @Column(nullable = false, unique = true)
-    private String codice;
+    @Column(nullable = false)
+    private LocalDate data;
 
     @Column(nullable = false)
-    private String nome;
+    private double valore;
 
-    @Column(nullable = false)
-    private String simbolo;
+    private double variazione; // differenza rispetto al giorno precedente (opzionale)
+
+    @ManyToOne
+    @JoinColumn(name = "trader_id")
+    private Trader trader;
 }

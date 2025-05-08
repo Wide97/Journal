@@ -22,10 +22,13 @@ public class Trader {
     @GeneratedValue
     private UUID id;
 
+    @Column(nullable = false, unique = true)
     private String username;
 
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
     @ManyToOne
@@ -37,5 +40,9 @@ public class Trader {
 
     @OneToMany(mappedBy = "trader", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Trade> trades = new ArrayList<>();
+
+    @OneToMany(mappedBy = "trader", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Capitale> andamentoCapitale = new ArrayList<>();
+
 }
 

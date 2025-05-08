@@ -22,9 +22,21 @@ public class Strategia {
     @GeneratedValue
     private UUID id;
 
+    @Column(nullable = false, unique = true)
     private String nome;
+
+    @Column(columnDefinition = "TEXT")
     private String descrizione;
 
     @OneToMany(mappedBy = "strategia", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Trade> trades = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Strategia{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", descrizione='" + descrizione + '\'' +
+                '}';
+    }
 }

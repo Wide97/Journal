@@ -28,7 +28,10 @@ public class Trade {
     private LocalTime oraAcquisto;
     private LocalTime oraVendita;
 
+    @Column(nullable = false)
     private double lotti;
+
+    @Column(nullable = false)
     private double leva;
 
     private double costoApertura;
@@ -36,11 +39,13 @@ public class Trade {
 
     private double profittoNetto;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private TipoTrade tipo; // LONG o SHORT
+    private TipoTrade tipo;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private EsitoTrade esito; // PROFITTO, PERDITA, BREAK_EVEN
+    private EsitoTrade esito;
 
     @ManyToOne
     @JoinColumn(name = "strategia_id")
@@ -54,3 +59,4 @@ public class Trade {
     @JoinColumn(name = "trader_id")
     private Trader trader;
 }
+
