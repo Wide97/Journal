@@ -11,31 +11,21 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "trader")
+@Table(name = "asset")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Trader {
+public class Asset {
 
     @Id
     @GeneratedValue
     private UUID id;
 
-    private String username;
+    private String simbolo; // Es: EUR/USD, XAU/USD, GER40
 
-    private String email;
+    private String tipo; // Forex, Indice, Commodity, Crypto, ecc.
 
-    private String password;
-
-    @ManyToOne
-    @JoinColumn(name = "valuta_id")
-    private Valuta valuta;
-
-    private double capitaleIniziale;
-    private double capitaleAttuale;
-
-    @OneToMany(mappedBy = "trader", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "asset", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Trade> trades = new ArrayList<>();
 }
-
