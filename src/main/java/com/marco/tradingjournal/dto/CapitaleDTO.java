@@ -13,9 +13,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CapitaleDTO {
-
+    private UUID id;
     private LocalDate data;
     private double valore;
-    private double variazione; // opzionale
+    private double variazione;
     private UUID traderId;
 }

@@ -1,25 +1,41 @@
 package com.marco.tradingjournal.dto;
 
+import com.marco.tradingjournal.entities.TipoTrade;
+import com.marco.tradingjournal.entities.EsitoTrade;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.UUID;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TradeDTO {
+
     private UUID id;
+
     private LocalDate dataAcquisto;
     private LocalTime oraAcquisto;
     private LocalDate dataVendita;
     private LocalTime oraVendita;
-    private String asset;
-    private double leva;
-    private double lottaggio;
-    private UUID strategia;
-    private String tipologia; // LONG o SHORT
-    private double aperturaCost;
-    private double chiusuraCost;
-    private String esito; // PROFITTO / STOP_LOSS / BREAK_EVEN
-    private double profitto;
-    private UUID traderId;
 
-    // Getters e Setters
+    private double lotti;
+    private double leva;
+
+    private double costoApertura;
+    private double costoChiusura;
+
+    private double profittoNetto;
+
+    private TipoTrade tipo;       // enum: LONG, SHORT
+    private EsitoTrade esito;     // enum: PROFITTO, STOP_LOSS, BREAK_EVEN
+
+    private UUID strategiaId;
+    private UUID assetId;
+    private UUID traderId;
 }
