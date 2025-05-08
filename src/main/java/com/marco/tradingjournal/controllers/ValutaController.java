@@ -18,29 +18,48 @@ public class ValutaController {
         this.valutaService = valutaService;
     }
 
+    // ────── CRUD BASE ──────
+
     @PostMapping
     public ResponseEntity<Valuta> createValuta(@RequestBody Valuta valuta) {
-        return ResponseEntity.ok(valutaService.createValuta(valuta));
+        return ResponseEntity.ok(valutaService.save(valuta));
     }
 
     @GetMapping
     public ResponseEntity<List<Valuta>> getAllValute() {
-        return ResponseEntity.ok(valutaService.getAllValute());
+        return ResponseEntity.ok(valutaService.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Valuta> getValutaById(@PathVariable UUID id) {
-        return ResponseEntity.ok(valutaService.getValutaById(id));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Valuta> updateValuta(@PathVariable UUID id, @RequestBody Valuta valuta) {
-        return ResponseEntity.ok(valutaService.updateValuta(id, valuta));
+        return ResponseEntity.ok(valutaService.findById(id));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteValuta(@PathVariable UUID id) {
-        valutaService.deleteValuta(id);
+        valutaService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    // ────── EXTRA ──────
+
+    @GetMapping("/codice/{codice}")
+    public ResponseEntity<Valuta> getByCodice(@PathVariable String codice) {
+        return ResponseEntity.ok(valutaService.findByCodice(codice));
+    }
+
+    @GetMapping("/codice/{codice}/exists")
+    public ResponseEntity<Boolean> existsByCodice(@PathVariable String codice) {
+        return ResponseEntity.ok(valutaService.existsByCodice(codice));
+    }
+
+    @GetMapping("/codice/{codice}/simbolo")
+    public ResponseEntity<String> getSimboloByCodice(@PathVariable String codice) {
+        return ResponseEntity.ok(valutaService.getSimboloByCodice(codice));
+    }
+
+    @GetMapping("/ordered")
+    public ResponseEntity<List<Valuta>> getAllOrdered() {
+        return ResponseEntity.ok(valutaService.findAllOrdered());
     }
 }
