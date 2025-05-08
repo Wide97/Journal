@@ -1,9 +1,11 @@
 package com.marco.tradingjournal.controllers;
 
+import com.marco.tradingjournal.dto.TradeDTO;
 import com.marco.tradingjournal.services.TradeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
