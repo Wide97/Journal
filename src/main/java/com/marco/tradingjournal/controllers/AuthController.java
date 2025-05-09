@@ -35,6 +35,7 @@ public class AuthController {
         String token = jwtUtils.generateJwtToken(trader.getId());
         Map<String, String> response = new HashMap<>();
         response.put("token", token);
+        response.put("traderId", trader.getId().toString());
 
         return ResponseEntity.ok(response);
     }
