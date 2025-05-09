@@ -1,5 +1,6 @@
 package com.marco.tradingjournal.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,9 +40,11 @@ public class Trader {
     private double capitaleAttuale;
 
     @OneToMany(mappedBy = "trader", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Trade> trades = new ArrayList<>();
 
     @OneToMany(mappedBy = "trader", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Capitale> andamentoCapitale = new ArrayList<>();
 
 }
