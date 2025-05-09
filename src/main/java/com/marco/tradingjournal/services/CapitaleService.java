@@ -6,16 +6,19 @@ import com.marco.tradingjournal.exception.CapitaleNotFoundException;
 import com.marco.tradingjournal.exception.InitialCapitalAlreadySetException;
 import com.marco.tradingjournal.exception.InvalidCapitaleException;
 import com.marco.tradingjournal.repositories.CapitaleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CapitaleService {
 
     private final CapitaleRepository capitaleRepository;
+    @Autowired
+    TraderService traderService;
 
     public CapitaleService(CapitaleRepository capitaleRepository) {
         this.capitaleRepository = capitaleRepository;
@@ -60,11 +63,10 @@ public class CapitaleService {
     }
 
     public List<Capitale> findAllByTraderOrdered(UUID traderId) {
-        return capitaleRepository.findAll().stream()
-                .filter(c -> c.getTrader().getId().equals(traderId))
-                .sorted(Comparator.comparing(Capitale::getData))
-                .collect(Collectors.toList());
+        Trader trader = traderService.findById(traderId);
+        return capitaleRepository.findAllByTraderOrderByDataAsc(trader);
     }
+
 
     public Capitale addNewCapitale(UUID traderId, LocalDate date, double valore, Trader trader) {
         if (valore <= 0 || date == null || trader == null) {
