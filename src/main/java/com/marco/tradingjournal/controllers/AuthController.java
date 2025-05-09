@@ -30,8 +30,7 @@ public class AuthController {
         String password = credentials.get("password");
 
         Trader trader = traderService.findByUsername(username);
-
-        if (!trader.getPassword().equals(password)) {
+        if (trader == null || !trader.getPassword().equals(password)) {
             return ResponseEntity.status(401).body("Credenziali non valide");
         }
 
@@ -41,4 +40,5 @@ public class AuthController {
 
         return ResponseEntity.ok(response);
     }
+
 }
