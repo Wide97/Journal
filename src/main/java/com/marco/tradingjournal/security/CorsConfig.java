@@ -13,6 +13,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
+                        // Forzo il deploy per abilitare CORS su Render
                         //.allowedOrigins("http://localhost:5173")
                         .allowedOrigins("*") // solo per test temporaneo
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
